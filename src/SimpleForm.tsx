@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   FormControl,
   FormLabel,
   FormErrorMessage,
-  FormHelperText,
   Input,
   Select,
   Button,
@@ -28,6 +27,7 @@ export default function SimpleForm() {
     handleSubmit,
     formState: { errors },
     watch,
+    setValue,
   } = useForm<IFormInput>();
   const onSubmit = handleSubmit((data) => console.log(data));
   const watchEmail = watch("email");
@@ -68,6 +68,13 @@ export default function SimpleForm() {
         <FormErrorMessage>
           {errors.email && errors.email.message}
         </FormErrorMessage>
+        <Button
+          size="sm"
+          variant="link"
+          onClick={() => setValue("email", "john@company.com")}
+        >
+          Fill with john@company.com
+        </Button>
       </FormControl>
 
       <FormControl
@@ -86,6 +93,13 @@ export default function SimpleForm() {
         <FormErrorMessage>
           {errors.confirmEmail && errors.confirmEmail.message}
         </FormErrorMessage>
+        <Button
+          size="sm"
+          variant="link"
+          onClick={() => setValue("confirmEmail", "john@company.com")}
+        >
+          Fill with john@company.com
+        </Button>
       </FormControl>
 
       <FormControl maxW="50%" mx="auto">
@@ -95,7 +109,6 @@ export default function SimpleForm() {
           <option value="Professional">Professional</option>
         </Select>
       </FormControl>
-
       <Button mt={4} colorScheme="teal" type="submit">
         Submit
       </Button>
